@@ -187,7 +187,7 @@
 }
 
 .weather-card {
-  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  background: linear-gradient(135deg, var(--weather-bg-start) 0%, var(--weather-bg-end) 100%);
   border-radius: var(--radius-md);
   padding: 1rem 1.25rem;
   display: flex;
@@ -204,7 +204,7 @@
 
 .weather-icon {
   font-size: 2.5rem;
-  color: #1976d2;
+  color: var(--weather-text);
 }
 
 .weather-temp {
@@ -215,12 +215,12 @@
 .temp-value {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #1565c0;
+  color: var(--weather-text-dark);
 }
 
 .weather-desc {
   font-size: 0.9rem;
-  color: #1976d2;
+  color: var(--weather-text);
 }
 
 .weather-details {
@@ -232,7 +232,7 @@
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  color: #1976d2;
+  color: var(--weather-text);
   font-size: 0.9rem;
 }
 
@@ -319,12 +319,12 @@
 }
 
 .map-btn.mapy-cz {
-  border-color: #e25822;
-  color: #e25822;
+  border-color: var(--mapy-cz-color);
+  color: var(--mapy-cz-color);
 }
 
 .map-btn.mapy-cz:hover {
-  background: #e25822;
+  background: var(--mapy-cz-color);
   color: white;
 }
 
@@ -368,18 +368,18 @@
 }
 
 .trail-easy {
-  background: #e8f5e9;
-  color: #2e7d32;
+  background: var(--trail-easy-bg);
+  color: var(--trail-easy-text);
 }
 
 .trail-medium {
-  background: #fff3e0;
-  color: #ef6c00;
+  background: var(--trail-medium-bg);
+  color: var(--trail-medium-text);
 }
 
 .trail-hard {
-  background: #ffebee;
-  color: #c62828;
+  background: var(--trail-hard-bg);
+  color: var(--trail-hard-text);
 }
 
 .trail-info {

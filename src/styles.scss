@@ -31,6 +31,46 @@
   --border-color: #e5e7eb;
   --accent-primary: #10b981;
   --accent-secondary: #059669;
+  
+  /* Header colors */
+  --header-bg-start: #1a3a2a;
+  --header-bg-mid: #2d5038;
+  --header-bg-end: #3d6848;
+  
+  /* Difficulty colors */
+  --difficulty-easy-bg: #dcfce7;
+  --difficulty-easy-text: #166534;
+  --difficulty-medium-bg: #fef3c7;
+  --difficulty-medium-text: #92400e;
+  --difficulty-hard-bg: #fee2e2;
+  --difficulty-hard-text: #991b1b;
+  
+  /* Status colors */
+  --success-color: #10b981;
+  --success-hover: #059669;
+  --error-color: #ef4444;
+  --warning-color: #f59e0b;
+  
+  /* Weather card */
+  --weather-bg-start: #e3f2fd;
+  --weather-bg-end: #bbdefb;
+  --weather-text: #1976d2;
+  --weather-text-dark: #1565c0;
+  
+  /* Mapy.cz color */
+  --mapy-cz-color: #e25822;
+  
+  /* Trail colors */
+  --trail-easy-bg: #e8f5e9;
+  --trail-easy-text: #2e7d32;
+  --trail-medium-bg: #fff3e0;
+  --trail-medium-text: #ef6c00;
+  --trail-hard-bg: #ffebee;
+  --trail-hard-text: #c62828;
+  
+  /* Footer */
+  --footer-bg: #1f2937;
+  --footer-text: #9ca3af;
 }
 
 /* Dark Mode */
@@ -56,6 +96,46 @@
   --border-color: #374151;
   --accent-primary: #34d399;
   --accent-secondary: #10b981;
+  
+  /* Header colors - darker in dark mode */
+  --header-bg-start: #0f1f17;
+  --header-bg-mid: #1a3a2a;
+  --header-bg-end: #2d5038;
+  
+  /* Difficulty colors - adjusted for dark mode */
+  --difficulty-easy-bg: #065f46;
+  --difficulty-easy-text: #a7f3d0;
+  --difficulty-medium-bg: #78350f;
+  --difficulty-medium-text: #fde68a;
+  --difficulty-hard-bg: #7f1d1d;
+  --difficulty-hard-text: #fecaca;
+  
+  /* Status colors */
+  --success-color: #34d399;
+  --success-hover: #10b981;
+  --error-color: #f87171;
+  --warning-color: #fbbf24;
+  
+  /* Weather card */
+  --weather-bg-start: #1e3a5f;
+  --weather-bg-end: #0f2744;
+  --weather-text: #93c5fd;
+  --weather-text-dark: #bfdbfe;
+  
+  /* Mapy.cz color */
+  --mapy-cz-color: #ff7043;
+  
+  /* Trail colors */
+  --trail-easy-bg: #065f46;
+  --trail-easy-text: #a7f3d0;
+  --trail-medium-bg: #78350f;
+  --trail-medium-text: #fde68a;
+  --trail-hard-bg: #7f1d1d;
+  --trail-hard-text: #fecaca;
+  
+  /* Footer */
+  --footer-bg: #0f172a;
+  --footer-text: #6b7280;
 }
 
 * {
