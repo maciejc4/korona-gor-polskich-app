@@ -1,0 +1,32 @@
+import { Mountain } from '../models/mountain.model';
+
+export const KORONA_GOR_POLSKICH: Mountain[] = [
+  { id: 1, name: 'Rysy', height: 2499, region: 'Tatry', difficulty: 'trudna', climbed: false },
+  { id: 2, name: 'Babia Góra', height: 1725, region: 'Beskid Żywiecki', difficulty: 'średnia', climbed: false },
+  { id: 3, name: 'Śnieżka', height: 1603, region: 'Karkonosze', difficulty: 'łatwa', climbed: false },
+  { id: 4, name: 'Śnieżnik', height: 1425, region: 'Masyw Śnieżnika', difficulty: 'średnia', climbed: false },
+  { id: 5, name: 'Tarnica', height: 1346, region: 'Bieszczady', difficulty: 'średnia', climbed: false },
+  { id: 6, name: 'Turbacz', height: 1310, region: 'Gorce', difficulty: 'łatwa', climbed: false },
+  { id: 7, name: 'Radziejowa', height: 1262, region: 'Beskid Sądecki', difficulty: 'średnia', climbed: false },
+  { id: 8, name: 'Pilsko', height: 1557, region: 'Beskid Żywiecki', difficulty: 'średnia', climbed: false },
+  { id: 9, name: 'Skrzyczne', height: 1257, region: 'Beskid Śląski', difficulty: 'łatwa', climbed: false },
+  { id: 10, name: 'Mogielica', height: 1170, region: 'Beskid Wyspowy', difficulty: 'łatwa', climbed: false },
+  { id: 11, name: 'Wysoka Kopa', height: 1126, region: 'Góry Izerskie', difficulty: 'łatwa', climbed: false },
+  { id: 12, name: 'Wielka Sowa', height: 1015, region: 'Góry Sowie', difficulty: 'łatwa', climbed: false },
+  { id: 13, name: 'Lackowa', height: 997, region: 'Beskid Niski', difficulty: 'łatwa', climbed: false },
+  { id: 14, name: 'Orlica', height: 1084, region: 'Góry Orlickie', difficulty: 'łatwa', climbed: false },
+  { id: 15, name: 'Kowadło', height: 989, region: 'Góry Złote', difficulty: 'łatwa', climbed: false },
+  { id: 16, name: 'Szczeliniec Wielki', height: 919, region: 'Góry Stołowe', difficulty: 'łatwa', climbed: false },
+  { id: 17, name: 'Jagodna', height: 977, region: 'Góry Bystrzyckie', difficulty: 'łatwa', climbed: false },
+  { id: 18, name: 'Rudawiec', height: 1106, region: 'Góry Kamienne', difficulty: 'łatwa', climbed: false },
+  { id: 19, name: 'Waligóra', height: 936, region: 'Góry Kamienne', difficulty: 'łatwa', climbed: false },
+  { id: 20, name: 'Chełmiec', height: 851, region: 'Góry Wałbrzyskie', difficulty: 'łatwa', climbed: false },
+  { id: 21, name: 'Skalnik', height: 945, region: 'Rudawy Janowickie', difficulty: 'łatwa', climbed: false },
+  { id: 22, name: 'Wysoka', height: 1050, region: 'Pieniny', difficulty: 'średnia', climbed: false },
+  { id: 23, name: 'Lubomir', height: 904, region: 'Beskid Makowski', difficulty: 'łatwa', climbed: false },
+  { id: 24, name: 'Łysica', height: 612, region: 'Góry Świętokrzyskie', difficulty: 'łatwa', climbed: false },
+  { id: 25, name: 'Ślęża', height: 718, region: 'Masyw Ślęży', difficulty: 'łatwa', climbed: false },
+  { id: 26, name: 'Kłodzka Góra', height: 765, region: 'Góry Bardzkie', difficulty: 'łatwa', climbed: false },
+  { id: 27, name: 'Luboń Wielki', height: 1022, region: 'Beskid Makowski', difficulty: 'średnia', climbed: false },
+  { id: 28, name: 'Wielka Rawka', height: 1307, region: 'Bieszczady', difficulty: 'średnia', climbed: false }
+];
