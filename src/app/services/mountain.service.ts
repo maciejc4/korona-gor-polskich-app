@@ -1,8 +1,9 @@
 import { Injectable, signal, computed } from '@angular/core';
-import { Mountain, SortColumn, SortDirection } from '../models/mountain.model';
+import { Mountain, SortColumn, SortDirection, ClimbedData } from '../models/mountain.model';
 import { KORONA_GOR_POLSKICH } from '../data/mountains.data';
 
 const STORAGE_KEY = 'korona-gor-polskich-climbed';
+const APP_VERSION = '1.0.0';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class MountainService {
           comparison = a.region.localeCompare(b.region, 'pl');
           break;
         case 'difficulty':
-          const difficultyOrder = { 'łatwa': 1, 'średnia': 2, 'trudna': 3 };
+          const difficultyOrder: Record<string, number> = { 'łatwa': 1, 'średnia': 2, 'trudna': 3 };
           comparison = difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
           break;
         case 'climbed':
@@ -96,6 +97,47 @@ export class MountainService {
     } else {
       this.sortColumnSignal.set(column);
       this.sortDirectionSignal.set('asc');
+    }
+  }
+
+  getMountainById(id: number): Mountain | undefined {
+    return this.mountainsSignal().find(m => m.id === id);
+  }
+
+  exportData(): ClimbedData {
+    return {
+      version: APP_VERSION,
+      exportDate: new Date().toISOString(),
+      climbedIds: this.mountainsSignal()
+        .filter(m => m.climbed)
+        .map(m => m.id)
+    };
+  }
+
+  importData(data: ClimbedData): { success: boolean; message: string } {
+    try {
+      if (!data || !Array.isArray(data.climbedIds)) {
+        return { success: false, message: 'Nieprawidłowy format pliku' };
+      }
+
+      const validIds = KORONA_GOR_POLSKICH.map(m => m.id);
+      const importedIds = data.climbedIds.filter(id => validIds.includes(id));
+
+      this.mountainsSignal.update(mountains =>
+        mountains.map(m => ({
+          ...m,
+          climbed: importedIds.includes(m.id)
+        }))
+      );
+      this.saveMountains();
+
+      return { 
+        success: true, 
+        message: `Zaimportowano ${importedIds.length} zdobytych szczytów` 
+      };
+    } catch (error) {
+      console.error('Error importing data:', error);
+      return { success: false, message: 'Błąd podczas importu danych' };
     }
   }
 }

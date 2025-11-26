@@ -1,0 +1,92 @@
+<div class="modal-overlay" (click)="onOverlayClick($event)">
+  <div class="modal-container">
+    <!-- Header -->
+    <header class="modal-header">
+      <div class="header-content">
+        <h2>{{ mountain.name }}</h2>
+        <div class="header-badges">
+          <span class="height-badge">
+            <span class="material-icons">height</span>
+            {{ mountain.height }} m n.p.m.
+          </span>
+          <span class="region-badge">{{ mountain.region }}</span>
+        </div>
+      </div>
+      <button class="close-btn" (click)="onClose()" aria-label="Zamknij">
+        <span class="material-icons">close</span>
+      </button>
+    </header>
+
+    <!-- Content -->
+    <div class="modal-content">
+      <!-- Image Section -->
+      <section class="image-section">
+        <img [src]="mountain.details.imageUrl" [alt]="mountain.name" loading="lazy" />
+        <span class="image-attribution">{{ mountain.details.imageAttribution }}</span>
+        <button 
+          class="climbed-overlay-btn" 
+          [class.is-climbed]="mountain.climbed"
+          (click)="onToggleClimbed()"
+        >
+          <span class="material-icons">{{ mountain.climbed ? 'check_circle' : 'radio_button_unchecked' }}</span>
+          {{ mountain.climbed ? 'Zdobyty!' : 'Oznacz jako zdobyty' }}
+        </button>
+      </section>
+
+      <!-- Info Grid -->
+      <div class="info-grid">
+        <!-- Description -->
+        <section class="description-section">
+          <h3>
+            <span class="material-icons">info</span>
+            Opis
+          </h3>
+          <p>{{ mountain.details.description }}</p>
+        </section>
+
+        <!-- Map -->
+        <section class="map-section">
+          <h3>
+            <span class="material-icons">map</span>
+            Lokalizacja
+          </h3>
+          <div class="map-container" #mapContainer></div>
+          <button class="open-map-btn" (click)="openInMaps()">
+            <span class="material-icons">open_in_new</span>
+            Otwórz w OpenStreetMap
+          </button>
+        </section>
+
+        <!-- Trails -->
+        <section class="trails-section">
+          <h3>
+            <span class="material-icons">hiking</span>
+            Szlaki turystyczne
+          </h3>
+          <div class="trails-list">
+            @for (trail of mountain.details.trails; track trail.name) {
+              <div class="trail-card">
+                <div class="trail-header">
+                  <span class="trail-name">{{ trail.name }}</span>
+                  <span class="trail-difficulty" [class]="getTrailDifficultyClass(trail.difficulty)">
+                    {{ trail.difficulty }}
+                  </span>
+                </div>
+                <div class="trail-info">
+                  <span class="trail-stat">
+                    <span class="material-icons">straighten</span>
+                    {{ trail.distance }}
+                  </span>
+                  <span class="trail-stat">
+                    <span class="material-icons">schedule</span>
+                    {{ trail.duration }}
+                  </span>
+                </div>
+              </div>
+            }
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

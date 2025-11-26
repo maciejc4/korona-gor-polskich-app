@@ -1,11 +1,14 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MountainService } from './services/mountain.service';
 import { PdfService } from './services/pdf.service';
-import { SortColumn } from './models/mountain.model';
+import { MountainModalComponent } from './components/mountain-modal/mountain-modal.component';
+import { Mountain, SortColumn, ClimbedData } from './models/mountain.model';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, MountainModalComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -17,8 +20,14 @@ export class App {
   protected readonly climbedMountains = this.mountainService.climbedMountains;
   protected readonly sortColumn = this.mountainService.sortColumn;
   protected readonly sortDirection = this.mountainService.sortDirection;
+  
+  protected selectedMountain = signal<Mountain | null>(null);
+  protected notification = signal<{ message: string; type: 'success' | 'error' } | null>(null);
 
-  protected toggleClimbed(id: number): void {
+  protected toggleClimbed(id: number, event?: Event): void {
+    if (event) {
+      event.stopPropagation();
+    }
     this.mountainService.toggleClimbed(id);
   }
 
@@ -50,5 +59,63 @@ export class App {
     const total = this.mountains().length;
     if (total === 0) return 0;
     return Math.round((this.climbedMountains().length / total) * 100);
+  }
+
+  protected openMountainDetails(mountain: Mountain): void {
+    this.selectedMountain.set(mountain);
+  }
+
+  protected closeMountainDetails(): void {
+    this.selectedMountain.set(null);
+  }
+
+  protected onModalToggleClimbed(id: number): void {
+    this.mountainService.toggleClimbed(id);
+    // Update the selected mountain reference
+    const updated = this.mountainService.getMountainById(id);
+    if (updated) {
+      this.selectedMountain.set(updated);
+    }
+  }
+
+  protected exportData(): void {
+    const data = this.mountainService.exportData();
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `korona-gor-polskich-${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    this.showNotification('Dane zostały wyeksportowane', 'success');
+  }
+
+  protected importData(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const data = JSON.parse(e.target?.result as string) as ClimbedData;
+        const result = this.mountainService.importData(data);
+        this.showNotification(result.message, result.success ? 'success' : 'error');
+      } catch {
+        this.showNotification('Błąd podczas odczytu pliku', 'error');
+      }
+      input.value = '';
+    };
+    reader.readAsText(file);
+  }
+
+  private showNotification(message: string, type: 'success' | 'error'): void {
+    this.notification.set({ message, type });
+    setTimeout(() => {
+      this.notification.set(null);
+    }, 3000);
   }
 }

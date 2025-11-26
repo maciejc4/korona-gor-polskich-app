@@ -1,59 +1,109 @@
-# KoronaGorPolskichApp
+# Korona Gór Polskich
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+Aplikacja do śledzenia postępu w zdobywaniu szczytów Korony Gór Polskich.
 
-## Development server
+## Funkcje
 
-To start a local development server, run:
+- 📊 **Tabela szczytów** - 28 najwyższych szczytów polskich pasm górskich
+- ✅ **Oznaczanie zdobytych** - zaznacz szczyty, które już zdobyłeś
+- 🔄 **Sortowanie** - sortuj po nazwie, wysokości, regionie lub trudności
+- 📱 **Szczegóły szczytu** - kliknij na szczyt, aby zobaczyć:
+  - Zdjęcie
+  - Opis
+  - Mapę OpenStreetMap
+  - Dostępne szlaki turystyczne
+- 📄 **Eksport PDF** - wygeneruj raport z listą zdobytych i niezdobytych szczytów
+- 💾 **Import/Eksport JSON** - zapisz i wczytaj swoje postępy
+- 🎨 **Górski motyw** - nowoczesny design inspirowany górami
 
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Uruchomienie lokalne
 
 ```bash
-ng generate --help
+# Instalacja zależności
+npm install
+
+# Uruchomienie serwera deweloperskiego
+npm start
+
+# Aplikacja będzie dostępna pod adresem http://localhost:4200
 ```
 
-## Building
-
-To build the project run:
+## Budowanie
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Testy
 
 ```bash
-ng test
+npm test
 ```
 
-## Running end-to-end tests
+## Konfiguracja Google AdWords
 
-For end-to-end (e2e) testing, run:
+Aby dodać reklamy Google AdWords do aplikacji:
 
-```bash
-ng e2e
+### 1. Utwórz konto Google AdSense
+1. Przejdź do [Google AdSense](https://www.google.com/adsense/)
+2. Zarejestruj się lub zaloguj na swoje konto Google
+3. Dodaj swoją stronę do weryfikacji
+
+### 2. Uzyskaj kod reklamy
+1. Po zatwierdzeniu strony, przejdź do sekcji "Reklamy"
+2. Wybierz "Według jednostki reklamowej" → "Utwórz nową jednostkę"
+3. Wybierz typ reklamy (np. "Reklama displayowa")
+4. Nazwij jednostkę i wybierz rozmiar (zalecany: responsywny lub 728x90 dla baneru)
+5. Skopiuj wygenerowany kod
+
+### 3. Dodaj kod do aplikacji
+
+#### Opcja A: Bezpośrednio w index.html
+Dodaj skrypt AdSense w sekcji `<head>`:
+```html
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX"
+     crossorigin="anonymous"></script>
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+#### Opcja B: W komponencie reklamy
+W pliku `src/app/app.html`, zamień placeholder reklamy:
 
-## Additional Resources
+```html
+<!-- Ad Container -->
+<aside class="ad-container">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-XXXXXXXXXX"
+       data-ad-slot="YYYYYYYYYY"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</aside>
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### 4. Zmienne do uzupełnienia
+- `ca-pub-XXXXXXXXXX` - Twój identyfikator wydawcy AdSense
+- `YYYYYYYYYY` - Identyfikator jednostki reklamowej
+
+### Wskazówki
+- Reklamy mogą nie wyświetlać się lokalnie (localhost)
+- Potrzebujesz zatwierdzonej domeny w AdSense
+- Reklamy zaczną się wyświetlać po weryfikacji strony (może to potrwać kilka dni)
+
+## Technologie
+
+- Angular 21
+- TypeScript
+- SCSS
+- jsPDF (generowanie PDF)
+- OpenStreetMap (mapy)
+
+## Licencja
+
+MIT
+
+## Autor
+
+Projekt utworzony z ❤️ dla miłośników polskich gór.

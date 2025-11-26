@@ -1,6 +1,15 @@
 <div class="app-container">
+  <!-- Notification -->
+  @if (notification()) {
+    <div class="notification" [class]="notification()!.type">
+      <span class="material-icons">{{ notification()!.type === 'success' ? 'check_circle' : 'error' }}</span>
+      {{ notification()!.message }}
+    </div>
+  }
+
   <!-- Header -->
   <header class="header">
+    <div class="header-bg"></div>
     <div class="header-content">
       <div class="logo">
         <span class="material-icons mountain-icon">landscape</span>
@@ -24,7 +33,7 @@
         </div>
         <div class="progress-bar-container">
           <div class="progress-bar" [style.width.%]="getProgressPercentage()">
-            <span class="progress-text">{{ getProgressPercentage() }}%</span>
+            <span class="progress-text" [class.hidden]="getProgressPercentage() < 10">{{ getProgressPercentage() }}%</span>
           </div>
         </div>
         <div class="stat">
@@ -37,6 +46,15 @@
 
   <!-- Main Content -->
   <main class="main-content">
+    <!-- Ad Placeholder -->
+    <aside class="ad-container">
+      <div class="ad-placeholder">
+        <span class="material-icons">campaign</span>
+        <p>Miejsce na reklamę</p>
+        <span class="ad-hint">Google AdWords</span>
+      </div>
+    </aside>
+
     <div class="table-card">
       <div class="table-header">
         <h2>
@@ -84,13 +102,17 @@
           </thead>
           <tbody>
             @for (mountain of mountains(); track mountain.id) {
-              <tr [class.climbed-row]="mountain.climbed">
+              <tr 
+                [class.climbed-row]="mountain.climbed"
+                (click)="openMountainDetails(mountain)"
+                class="clickable-row"
+              >
                 <td class="checkbox-col">
-                  <label class="checkbox-container">
+                  <label class="checkbox-container" (click)="$event.stopPropagation()">
                     <input 
                       type="checkbox" 
                       [checked]="mountain.climbed"
-                      (change)="toggleClimbed(mountain.id)"
+                      (change)="toggleClimbed(mountain.id, $event)"
                     >
                     <span class="checkmark">
                       <span class="material-icons check-icon">check</span>
@@ -99,6 +121,9 @@
                 </td>
                 <td class="name-col">
                   <span class="mountain-name">{{ mountain.name }}</span>
+                  <span class="view-details">
+                    <span class="material-icons">visibility</span>
+                  </span>
                 </td>
                 <td class="height-col">
                   <span class="height-value">{{ mountain.height }}</span>
@@ -117,21 +142,46 @@
       </div>
     </div>
 
-    <!-- PDF Generation Button -->
+    <!-- Actions Section -->
     <div class="actions-section">
-      <button class="pdf-button" (click)="generatePdf()">
-        <span class="material-icons">picture_as_pdf</span>
-        Wygeneruj raport PDF
-      </button>
-      <p class="pdf-hint">Pobierz raport z listą zdobytych i niezdobytych szczytów</p>
+      <div class="actions-grid">
+        <button class="action-button primary" (click)="generatePdf()">
+          <span class="material-icons">picture_as_pdf</span>
+          Wygeneruj raport PDF
+        </button>
+        
+        <button class="action-button secondary" (click)="exportData()">
+          <span class="material-icons">file_download</span>
+          Eksportuj dane
+        </button>
+        
+        <label class="action-button secondary file-input-label">
+          <span class="material-icons">file_upload</span>
+          Importuj dane
+          <input type="file" accept=".json" (change)="importData($event)" hidden>
+        </label>
+      </div>
+      <p class="actions-hint">Eksportuj swoje postępy lub wczytaj zapisane dane</p>
     </div>
   </main>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-content">
-      <span class="material-icons">eco</span>
-      <p>Korona Gór Polskich</p>
+      <div class="footer-brand">
+        <span class="material-icons">eco</span>
+        <p>Korona Gór Polskich</p>
+      </div>
+      <p class="footer-copyright">© 2024 Wszystkie prawa zastrzeżone</p>
     </div>
   </footer>
 </div>
+
+<!-- Mountain Details Modal -->
+@if (selectedMountain()) {
+  <app-mountain-modal
+    [mountain]="selectedMountain()!"
+    (close)="closeMountainDetails()"
+    (toggleClimbed)="onModalToggleClimbed($event)"
+  />
+}
