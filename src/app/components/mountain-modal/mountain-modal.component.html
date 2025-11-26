@@ -33,6 +33,45 @@
         </button>
       </section>
 
+      <!-- Weather Section -->
+      <section class="weather-section">
+        <h3>
+          <span class="material-icons">cloud</span>
+          Aktualna pogoda
+        </h3>
+        @if (weatherLoading()) {
+          <div class="weather-loading">
+            <span class="material-icons spinning">sync</span>
+            <span>Ładowanie...</span>
+          </div>
+        } @else if (weather()) {
+          <div class="weather-card">
+            <div class="weather-main">
+              <span class="material-icons weather-icon">{{ weather()!.icon }}</span>
+              <div class="weather-temp">
+                <span class="temp-value">{{ weather()!.temperature }}°C</span>
+                <span class="weather-desc">{{ weather()!.description }}</span>
+              </div>
+            </div>
+            <div class="weather-details">
+              <div class="weather-detail">
+                <span class="material-icons">air</span>
+                <span>{{ weather()!.windSpeed }} km/h</span>
+              </div>
+              <div class="weather-detail">
+                <span class="material-icons">water_drop</span>
+                <span>{{ weather()!.humidity }}%</span>
+              </div>
+            </div>
+          </div>
+        } @else {
+          <div class="weather-error">
+            <span class="material-icons">cloud_off</span>
+            <span>Nie udało się pobrać pogody</span>
+          </div>
+        }
+      </section>
+
       <!-- Info Grid -->
       <div class="info-grid">
         <!-- Description -->
@@ -51,10 +90,16 @@
             Lokalizacja
           </h3>
           <div class="map-container" #mapContainer></div>
-          <button class="open-map-btn" (click)="openInMaps()">
-            <span class="material-icons">open_in_new</span>
-            Otwórz w OpenStreetMap
-          </button>
+          <div class="map-buttons">
+            <button class="map-btn mapy-cz" (click)="openInMapyCz()">
+              <span class="material-icons">hiking</span>
+              Mapy.cz (turystyczna)
+            </button>
+            <button class="map-btn osm" (click)="openInOSM()">
+              <span class="material-icons">map</span>
+              OpenStreetMap
+            </button>
+          </div>
         </section>
 
         <!-- Trails -->

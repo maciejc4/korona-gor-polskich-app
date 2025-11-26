@@ -3,26 +3,31 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MountainService } from './services/mountain.service';
 import { PdfService } from './services/pdf.service';
+import { ThemeService } from './services/theme.service';
 import { MountainModalComponent } from './components/mountain-modal/mountain-modal.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 import { Mountain, SortColumn, ClimbedData } from './models/mountain.model';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule, MountainModalComponent],
+  imports: [CommonModule, FormsModule, MountainModalComponent, StatisticsComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
   protected readonly mountainService = inject(MountainService);
   protected readonly pdfService = inject(PdfService);
+  protected readonly themeService = inject(ThemeService);
 
   protected readonly sortColumn = this.mountainService.sortColumn;
   protected readonly sortDirection = this.mountainService.sortDirection;
   protected readonly climbedMountains = this.mountainService.climbedMountains;
+  protected readonly theme = this.themeService.theme;
   
   protected searchQuery = signal<string>('');
   protected selectedMountain = signal<Mountain | null>(null);
+  protected showStatistics = signal<boolean>(false);
   protected notification = signal<{ message: string; type: 'success' | 'error' } | null>(null);
 
   protected readonly filteredMountains = computed(() => {
@@ -87,6 +92,18 @@ export class App {
     const total = this.totalMountains();
     if (total === 0) return 0;
     return Math.round((this.climbedMountains().length / total) * 100);
+  }
+
+  protected toggleTheme(): void {
+    this.themeService.toggleTheme();
+  }
+
+  protected openStatistics(): void {
+    this.showStatistics.set(true);
+  }
+
+  protected closeStatistics(): void {
+    this.showStatistics.set(false);
   }
 
   protected openMountainDetails(mountain: Mountain): void {

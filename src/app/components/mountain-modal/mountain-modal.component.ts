@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Mountain } from '../../models/mountain.model';
+import { WeatherService, WeatherData } from '../../services/weather.service';
 
 @Component({
   selector: 'app-mountain-modal',
@@ -16,7 +17,11 @@ export class MountainModalComponent implements OnInit, AfterViewInit, OnDestroy 
   
   @ViewChild('mapContainer') mapContainer!: ElementRef<HTMLDivElement>;
   
+  private weatherService = inject(WeatherService);
   private escapeListener?: (event: KeyboardEvent) => void;
+
+  weather = signal<WeatherData | null>(null);
+  weatherLoading = signal<boolean>(true);
 
   ngOnInit(): void {
     this.escapeListener = (event: KeyboardEvent) => {
@@ -26,6 +31,8 @@ export class MountainModalComponent implements OnInit, AfterViewInit, OnDestroy 
     };
     document.addEventListener('keydown', this.escapeListener);
     document.body.style.overflow = 'hidden';
+    
+    this.loadWeather();
   }
 
   ngAfterViewInit(): void {
@@ -37,6 +44,14 @@ export class MountainModalComponent implements OnInit, AfterViewInit, OnDestroy 
       document.removeEventListener('keydown', this.escapeListener);
     }
     document.body.style.overflow = '';
+  }
+
+  private async loadWeather(): Promise<void> {
+    this.weatherLoading.set(true);
+    const { latitude, longitude } = this.mountain.details;
+    const data = await this.weatherService.getWeather(latitude, longitude);
+    this.weather.set(data);
+    this.weatherLoading.set(false);
   }
 
   private initMap(): void {
@@ -82,8 +97,13 @@ export class MountainModalComponent implements OnInit, AfterViewInit, OnDestroy 
     }
   }
 
-  openInMaps(): void {
+  openInMapyCz(): void {
     const { latitude, longitude } = this.mountain.details;
-    window.open(`https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}#map=14/${latitude}/${longitude}`, '_blank');
+    window.open(`https://mapy.cz/turisticka?x=${longitude}&y=${latitude}&z=15&source=coor&id=${longitude}%2C${latitude}`, '_blank');
+  }
+
+  openInOSM(): void {
+    const { latitude, longitude } = this.mountain.details;
+    window.open(`https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}#map=15/${latitude}/${longitude}`, '_blank');
   }
 }

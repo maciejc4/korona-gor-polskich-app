@@ -20,13 +20,21 @@
           <p class="tagline">Zdobądź 28 najwyższych szczytów polskich pasm górskich</p>
         </div>
       </div>
+      <div class="header-actions">
+        <button class="header-btn" (click)="openStatistics()" title="Statystyki">
+          <span class="material-icons">analytics</span>
+        </button>
+        <button class="header-btn" (click)="toggleTheme()" title="Zmień motyw">
+          <span class="material-icons">{{ theme() === 'dark' ? 'light_mode' : 'dark_mode' }}</span>
+        </button>
+      </div>
     </div>
   </header>
 
   <!-- Stats Bar -->
   <section class="stats-bar">
     <div class="stats-container">
-      <div class="stat-item">
+      <div class="stat-item clickable" (click)="openStatistics()">
         <div class="stat-icon climbed-icon">
           <span class="material-icons">flag</span>
         </div>
@@ -36,7 +44,7 @@
         </div>
       </div>
       
-      <div class="stat-item progress-item">
+      <div class="stat-item progress-item clickable" (click)="openStatistics()">
         <div class="progress-ring">
           <svg viewBox="0 0 36 36">
             <path class="progress-bg"
@@ -208,6 +216,11 @@
           <span class="btn-text">Generuj PDF</span>
         </button>
         
+        <button class="action-button secondary" (click)="openStatistics()">
+          <span class="material-icons">analytics</span>
+          <span class="btn-text">Statystyki</span>
+        </button>
+        
         <button class="action-button secondary" (click)="exportData()">
           <span class="material-icons">download</span>
           <span class="btn-text">Eksportuj</span>
@@ -245,4 +258,9 @@
     (close)="closeMountainDetails()"
     (toggleClimbed)="onModalToggleClimbed($event)"
   />
+}
+
+<!-- Statistics Modal -->
+@if (showStatistics()) {
+  <app-statistics (close)="closeStatistics()" />
 }

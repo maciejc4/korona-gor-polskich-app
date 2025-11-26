@@ -167,6 +167,96 @@
   font-size: 1.25rem;
 }
 
+/* Weather Section */
+.weather-section {
+  margin-bottom: 1.5rem;
+}
+
+.weather-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.75rem 0;
+  font-size: 1.1rem;
+  color: var(--color-primary-dark);
+}
+
+.weather-section h3 .material-icons {
+  font-size: 1.25rem;
+  color: var(--color-primary);
+}
+
+.weather-card {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.weather-icon {
+  font-size: 2.5rem;
+  color: #1976d2;
+}
+
+.weather-temp {
+  display: flex;
+  flex-direction: column;
+}
+
+.temp-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1565c0;
+}
+
+.weather-desc {
+  font-size: 0.9rem;
+  color: #1976d2;
+}
+
+.weather-details {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.weather-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #1976d2;
+  font-size: 0.9rem;
+}
+
+.weather-detail .material-icons {
+  font-size: 1.1rem;
+}
+
+.weather-loading, .weather-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 /* Info Grid */
 .info-grid {
   display: grid;
@@ -203,7 +293,13 @@
   margin-bottom: 0.75rem;
 }
 
-.open-map-btn {
+.map-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.map-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -217,12 +313,22 @@
   transition: all 0.2s ease;
 }
 
-.open-map-btn:hover {
+.map-btn:hover {
   background: var(--color-primary);
   color: white;
 }
 
-.open-map-btn .material-icons {
+.map-btn.mapy-cz {
+  border-color: #e25822;
+  color: #e25822;
+}
+
+.map-btn.mapy-cz:hover {
+  background: #e25822;
+  color: white;
+}
+
+.map-btn .material-icons {
   font-size: 1rem;
 }
 

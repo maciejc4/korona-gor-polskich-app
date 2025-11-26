@@ -2,7 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #f8faf8;
+  background: var(--bg-secondary);
 }
 
 /* Notification */
@@ -63,6 +63,38 @@
   z-index: 1;
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.header-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.header-btn .material-icons {
+  color: white;
+  font-size: 1.25rem;
+}
+
+.header-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
 }
 
 .logo {
@@ -104,13 +136,13 @@
 
 /* Stats Bar */
 .stats-bar {
-  background: white;
+  background: var(--bg-primary);
   padding: 1.5rem 2rem;
   margin-top: -1rem;
   position: relative;
   z-index: 10;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .stats-container {
@@ -125,6 +157,18 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.stat-item.clickable {
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 12px;
+  margin: -0.5rem;
+  transition: background 0.2s ease;
+}
+
+.stat-item.clickable:hover {
+  background: var(--bg-secondary);
 }
 
 .stat-icon {
@@ -157,13 +201,13 @@
 .stat-number {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #1f2937;
+  color: var(--text-primary);
   line-height: 1;
 }
 
 .stat-label {
   font-size: 0.8rem;
-  color: #6b7280;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-top: 0.25rem;
@@ -189,13 +233,13 @@
 
 .progress-bg {
   fill: none;
-  stroke: #e5e7eb;
+  stroke: var(--border-color);
   stroke-width: 3;
 }
 
 .progress-fill {
   fill: none;
-  stroke: #10b981;
+  stroke: var(--accent-primary);
   stroke-width: 3;
   stroke-linecap: round;
   transition: stroke-dasharray 0.5s ease;
@@ -208,7 +252,7 @@
   transform: translate(-50%, -50%);
   font-size: 0.9rem;
   font-weight: 700;
-  color: #1f2937;
+  color: var(--text-primary);
 }
 
 /* Main Content */
@@ -226,8 +270,8 @@
 }
 
 .ad-placeholder {
-  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
-  border: 1px dashed #d1d5db;
+  background: var(--bg-secondary);
+  border: 1px dashed var(--border-color);
   border-radius: 8px;
   padding: 0.875rem 1.25rem;
 }
@@ -236,7 +280,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: #9ca3af;
+  color: var(--text-tertiary);
 }
 
 .ad-content .material-icons {
@@ -261,11 +305,11 @@
 
 /* Table Card */
 .table-card {
-  background: white;
+  background: var(--bg-primary);
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-color);
 }
 
 .table-toolbar {
@@ -273,8 +317,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid #e5e7eb;
-  background: #fafafa;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-secondary);
   gap: 1rem;
   flex-wrap: wrap;
 }
@@ -286,12 +330,12 @@
   margin: 0;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #1f2937;
+  color: var(--text-primary);
 }
 
 .toolbar-left .material-icons {
   font-size: 1.25rem;
-  color: #6b7280;
+  color: var(--text-secondary);
 }
 
 .toolbar-right {
@@ -310,29 +354,30 @@
 .search-icon {
   position: absolute;
   left: 0.75rem;
-  color: #9ca3af;
+  color: var(--text-tertiary);
   font-size: 1.25rem;
   pointer-events: none;
 }
 
 .search-input {
   padding: 0.625rem 2.5rem 0.625rem 2.5rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   font-size: 0.875rem;
   width: 260px;
   transition: all 0.2s ease;
-  background: white;
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .search-input:focus {
   outline: none;
-  border-color: #10b981;
+  border-color: var(--accent-primary);
   box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
 }
 
 .search-input::placeholder {
-  color: #9ca3af;
+  color: var(--text-tertiary);
 }
 
 .clear-search {
@@ -342,7 +387,7 @@
   border: none;
   padding: 0.25rem;
   cursor: pointer;
-  color: #9ca3af;
+  color: var(--text-tertiary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -351,8 +396,8 @@
 }
 
 .clear-search:hover {
-  background: #f3f4f6;
-  color: #6b7280;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
 }
 
 .clear-search .material-icons {
@@ -361,8 +406,8 @@
 
 .results-count {
   font-size: 0.8rem;
-  color: #6b7280;
-  background: #f3f4f6;
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
   padding: 0.375rem 0.75rem;
   border-radius: 6px;
   white-space: nowrap;
@@ -379,8 +424,8 @@
 }
 
 .mountains-table thead {
-  background: #f9fafb;
-  border-bottom: 2px solid #e5e7eb;
+  background: var(--bg-secondary);
+  border-bottom: 2px solid var(--border-color);
 }
 
 .mountains-table th {
@@ -397,7 +442,7 @@
   background: transparent;
   border: none;
   font-weight: 600;
-  color: #4b5563;
+  color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.2s ease;
   font-size: 0.8rem;
@@ -406,12 +451,12 @@
 }
 
 .sort-btn:hover {
-  background: #f3f4f6;
-  color: #1f2937;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
 }
 
 .sort-btn.active {
-  color: #10b981;
+  color: var(--accent-primary);
 }
 
 .sort-icon {
@@ -424,7 +469,7 @@
 }
 
 .mountains-table tbody tr {
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--border-color);
   transition: all 0.15s ease;
 }
 
@@ -433,15 +478,15 @@
 }
 
 .mountains-table tbody tr:hover {
-  background: #f0fdf4;
+  background: rgba(16, 185, 129, 0.08);
 }
 
 .mountains-table tbody tr.climbed-row {
-  background: #f0fdf4;
+  background: rgba(16, 185, 129, 0.1);
 }
 
 .mountains-table tbody tr.climbed-row:hover {
-  background: #dcfce7;
+  background: rgba(16, 185, 129, 0.15);
 }
 
 .mountains-table td {
@@ -467,12 +512,12 @@
 .checkmark {
   width: 28px;
   height: 28px;
-  border: 2px solid #d1d5db;
+  border: 2px solid var(--border-color);
   border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: white;
+  background: var(--bg-primary);
   transition: all 0.2s ease;
 }
 
@@ -483,8 +528,8 @@
 }
 
 .checkbox-container input:checked + .checkmark {
-  background: #10b981;
-  border-color: #10b981;
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
 }
 
 .checkbox-container input:checked + .checkmark .check-icon {
@@ -492,7 +537,7 @@
 }
 
 .checkbox-container:hover .checkmark {
-  border-color: #10b981;
+  border-color: var(--accent-primary);
 }
 
 /* Name Column */
@@ -504,13 +549,13 @@
 
 .mountain-name {
   font-weight: 600;
-  color: #1f2937;
+  color: var(--text-primary);
 }
 
 .view-hint {
   opacity: 0;
   transition: opacity 0.2s ease;
-  color: #10b981;
+  color: var(--accent-primary);
 }
 
 .view-hint .material-icons {
@@ -522,7 +567,7 @@ tr:hover .view-hint {
 }
 
 .climbed-row .mountain-name {
-  color: #059669;
+  color: var(--accent-primary);
 }
 
 /* Height Column */
@@ -533,18 +578,18 @@ tr:hover .view-hint {
 .height-value {
   font-weight: 700;
   font-size: 1rem;
-  color: #1f2937;
+  color: var(--text-primary);
 }
 
 .height-unit {
   font-size: 0.75rem;
-  color: #6b7280;
+  color: var(--text-secondary);
   margin-left: 0.25rem;
 }
 
 /* Region Column */
 .region-col {
-  color: #4b5563;
+  color: var(--text-secondary);
 }
 
 /* Difficulty Badge */
@@ -582,7 +627,7 @@ tr:hover .view-hint {
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
-  color: #9ca3af;
+  color: var(--text-tertiary);
 }
 
 .empty-state .material-icons {
@@ -631,14 +676,14 @@ tr:hover .view-hint {
 }
 
 .action-button.secondary {
-  background: white;
-  color: #374151;
-  border: 1px solid #d1d5db;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
 }
 
 .action-button.secondary:hover {
-  background: #f9fafb;
-  border-color: #9ca3af;
+  background: var(--bg-secondary);
+  border-color: var(--text-tertiary);
 }
 
 .file-input-label {
