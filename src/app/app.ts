@@ -1,5 +1,6 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { MountainService } from './services/mountain.service';
 import { PdfService } from './services/pdf.service';
 import { MountainModalComponent } from './components/mountain-modal/mountain-modal.component';
@@ -8,7 +9,7 @@ import { Mountain, SortColumn, ClimbedData } from './models/mountain.model';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, MountainModalComponent],
+  imports: [CommonModule, FormsModule, MountainModalComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -16,13 +17,40 @@ export class App {
   protected readonly mountainService = inject(MountainService);
   protected readonly pdfService = inject(PdfService);
 
-  protected readonly mountains = this.mountainService.mountains;
-  protected readonly climbedMountains = this.mountainService.climbedMountains;
   protected readonly sortColumn = this.mountainService.sortColumn;
   protected readonly sortDirection = this.mountainService.sortDirection;
+  protected readonly climbedMountains = this.mountainService.climbedMountains;
   
+  protected searchQuery = signal<string>('');
   protected selectedMountain = signal<Mountain | null>(null);
   protected notification = signal<{ message: string; type: 'success' | 'error' } | null>(null);
+
+  protected readonly filteredMountains = computed(() => {
+    const query = this.searchQuery().toLowerCase().trim();
+    const allMountains = this.mountainService.mountains();
+    
+    if (!query) {
+      return allMountains;
+    }
+    
+    return allMountains.filter(m => 
+      m.name.toLowerCase().includes(query) ||
+      m.region.toLowerCase().includes(query) ||
+      m.difficulty.toLowerCase().includes(query) ||
+      m.height.toString().includes(query)
+    );
+  });
+
+  protected readonly totalMountains = computed(() => this.mountainService.mountains().length);
+
+  protected onSearchChange(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this.searchQuery.set(value);
+  }
+
+  protected clearSearch(): void {
+    this.searchQuery.set('');
+  }
 
   protected toggleClimbed(id: number, event?: Event): void {
     if (event) {
@@ -56,7 +84,7 @@ export class App {
   }
 
   protected getProgressPercentage(): number {
-    const total = this.mountains().length;
+    const total = this.totalMountains();
     if (total === 0) return 0;
     return Math.round((this.climbedMountains().length / total) * 100);
   }

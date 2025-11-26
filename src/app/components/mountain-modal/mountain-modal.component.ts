@@ -42,7 +42,9 @@ export class MountainModalComponent implements OnInit, AfterViewInit, OnDestroy 
   private initMap(): void {
     if (this.mapContainer && this.mountain) {
       const { latitude, longitude } = this.mountain.details;
-      const mapUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${longitude - 0.05}%2C${latitude - 0.03}%2C${longitude + 0.05}%2C${latitude + 0.03}&layer=mapnik&marker=${latitude}%2C${longitude}`;
+      // Use smaller bounding box for more precise zoom on the peak
+      const delta = 0.015; // ~1.5km area
+      const mapUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${longitude - delta}%2C${latitude - delta}%2C${longitude + delta}%2C${latitude + delta}&layer=mapnik&marker=${latitude}%2C${longitude}`;
       
       const iframe = document.createElement('iframe');
       iframe.src = mapUrl;

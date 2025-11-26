@@ -12,33 +12,51 @@
     <div class="header-bg"></div>
     <div class="header-content">
       <div class="logo">
-        <span class="material-icons mountain-icon">landscape</span>
-        <h1>Korona Gór Polskich</h1>
+        <div class="logo-icon">
+          <span class="material-icons">terrain</span>
+        </div>
+        <div class="logo-text">
+          <h1>Korona Gór Polskich</h1>
+          <p class="tagline">Zdobądź 28 najwyższych szczytów polskich pasm górskich</p>
+        </div>
       </div>
-      <p class="subtitle">Zdobądź najwyższe szczyty polskich pasm górskich</p>
     </div>
   </header>
 
-  <!-- Progress Section -->
-  <section class="progress-section">
-    <div class="progress-card">
-      <div class="progress-header">
-        <span class="material-icons">trending_up</span>
-        <h2>Twój postęp</h2>
+  <!-- Stats Bar -->
+  <section class="stats-bar">
+    <div class="stats-container">
+      <div class="stat-item">
+        <div class="stat-icon climbed-icon">
+          <span class="material-icons">flag</span>
+        </div>
+        <div class="stat-content">
+          <span class="stat-number">{{ climbedMountains().length }}</span>
+          <span class="stat-label">Zdobytych</span>
+        </div>
       </div>
-      <div class="progress-stats">
-        <div class="stat">
-          <span class="stat-value climbed">{{ climbedMountains().length }}</span>
-          <span class="stat-label">Zdobyte</span>
+      
+      <div class="stat-item progress-item">
+        <div class="progress-ring">
+          <svg viewBox="0 0 36 36">
+            <path class="progress-bg"
+              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            <path class="progress-fill"
+              [attr.stroke-dasharray]="getProgressPercentage() + ', 100'"
+              d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+          </svg>
+          <span class="progress-value">{{ getProgressPercentage() }}%</span>
         </div>
-        <div class="progress-bar-container">
-          <div class="progress-bar" [style.width.%]="getProgressPercentage()">
-            <span class="progress-text" [class.hidden]="getProgressPercentage() < 10">{{ getProgressPercentage() }}%</span>
-          </div>
+        <span class="stat-label">Postęp</span>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-icon remaining-icon">
+          <span class="material-icons">explore</span>
         </div>
-        <div class="stat">
-          <span class="stat-value remaining">{{ mountains().length - climbedMountains().length }}</span>
-          <span class="stat-label">Pozostało</span>
+        <div class="stat-content">
+          <span class="stat-number">{{ totalMountains() - climbedMountains().length }}</span>
+          <span class="stat-label">Do zdobycia</span>
         </div>
       </div>
     </div>
@@ -49,19 +67,47 @@
     <!-- Ad Placeholder -->
     <aside class="ad-container">
       <div class="ad-placeholder">
-        <span class="material-icons">campaign</span>
-        <p>Miejsce na reklamę</p>
-        <span class="ad-hint">Google AdWords</span>
+        <div class="ad-content">
+          <span class="material-icons">ads_click</span>
+          <div class="ad-text">
+            <span class="ad-title">Przestrzeń reklamowa</span>
+            <span class="ad-subtitle">Google AdWords</span>
+          </div>
+        </div>
       </div>
     </aside>
 
     <div class="table-card">
-      <div class="table-header">
-        <h2>
-          <span class="material-icons">terrain</span>
-          Lista szczytów
-        </h2>
-        <span class="mountain-count">{{ mountains().length }} szczytów</span>
+      <div class="table-toolbar">
+        <div class="toolbar-left">
+          <h2>
+            <span class="material-icons">list</span>
+            Lista szczytów
+          </h2>
+        </div>
+        
+        <div class="toolbar-right">
+          <!-- Search Box -->
+          <div class="search-box">
+            <span class="material-icons search-icon">search</span>
+            <input 
+              type="text" 
+              placeholder="Szukaj szczytu, regionu..."
+              [value]="searchQuery()"
+              (input)="onSearchChange($event)"
+              class="search-input"
+            >
+            @if (searchQuery()) {
+              <button class="clear-search" (click)="clearSearch()">
+                <span class="material-icons">close</span>
+              </button>
+            }
+          </div>
+          
+          <span class="results-count">
+            {{ filteredMountains().length }} z {{ totalMountains() }}
+          </span>
+        </div>
       </div>
       
       <div class="table-container">
@@ -70,13 +116,13 @@
             <tr>
               <th class="checkbox-col">
                 <button class="sort-btn" (click)="sort('climbed')" [class.active]="sortColumn() === 'climbed'">
-                  Zdobyty
+                  <span class="material-icons">check_circle</span>
                   <span class="material-icons sort-icon">{{ getSortIcon('climbed') }}</span>
                 </button>
               </th>
               <th>
                 <button class="sort-btn" (click)="sort('name')" [class.active]="sortColumn() === 'name'">
-                  Nazwa szczytu
+                  Nazwa
                   <span class="material-icons sort-icon">{{ getSortIcon('name') }}</span>
                 </button>
               </th>
@@ -88,7 +134,7 @@
               </th>
               <th>
                 <button class="sort-btn" (click)="sort('region')" [class.active]="sortColumn() === 'region'">
-                  Pasmo górskie
+                  Region
                   <span class="material-icons sort-icon">{{ getSortIcon('region') }}</span>
                 </button>
               </th>
@@ -101,7 +147,7 @@
             </tr>
           </thead>
           <tbody>
-            @for (mountain of mountains(); track mountain.id) {
+            @for (mountain of filteredMountains(); track mountain.id) {
               <tr 
                 [class.climbed-row]="mountain.climbed"
                 (click)="openMountainDetails(mountain)"
@@ -120,20 +166,32 @@
                   </label>
                 </td>
                 <td class="name-col">
-                  <span class="mountain-name">{{ mountain.name }}</span>
-                  <span class="view-details">
-                    <span class="material-icons">visibility</span>
-                  </span>
+                  <div class="mountain-name-cell">
+                    <span class="mountain-name">{{ mountain.name }}</span>
+                    <span class="view-hint">
+                      <span class="material-icons">open_in_new</span>
+                    </span>
+                  </div>
                 </td>
                 <td class="height-col">
                   <span class="height-value">{{ mountain.height }}</span>
-                  <span class="height-unit">m n.p.m.</span>
+                  <span class="height-unit">m</span>
                 </td>
                 <td class="region-col">{{ mountain.region }}</td>
                 <td class="difficulty-col">
                   <span class="difficulty-badge" [class]="getDifficultyClass(mountain.difficulty)">
                     {{ mountain.difficulty }}
                   </span>
+                </td>
+              </tr>
+            }
+            @empty {
+              <tr class="empty-row">
+                <td colspan="5">
+                  <div class="empty-state">
+                    <span class="material-icons">search_off</span>
+                    <p>Brak wyników dla "{{ searchQuery() }}"</p>
+                  </div>
                 </td>
               </tr>
             }
@@ -147,21 +205,20 @@
       <div class="actions-grid">
         <button class="action-button primary" (click)="generatePdf()">
           <span class="material-icons">picture_as_pdf</span>
-          Wygeneruj raport PDF
+          <span class="btn-text">Generuj PDF</span>
         </button>
         
         <button class="action-button secondary" (click)="exportData()">
-          <span class="material-icons">file_download</span>
-          Eksportuj dane
+          <span class="material-icons">download</span>
+          <span class="btn-text">Eksportuj</span>
         </button>
         
         <label class="action-button secondary file-input-label">
-          <span class="material-icons">file_upload</span>
-          Importuj dane
+          <span class="material-icons">upload</span>
+          <span class="btn-text">Importuj</span>
           <input type="file" accept=".json" (change)="importData($event)" hidden>
         </label>
       </div>
-      <p class="actions-hint">Eksportuj swoje postępy lub wczytaj zapisane dane</p>
     </div>
   </main>
 
@@ -169,10 +226,14 @@
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-brand">
-        <span class="material-icons">eco</span>
-        <p>Korona Gór Polskich</p>
+        <span class="material-icons">terrain</span>
+        <span>Korona Gór Polskich</span>
       </div>
-      <p class="footer-copyright">© 2024 Wszystkie prawa zastrzeżone</p>
+      <div class="footer-links">
+        <span>© 2024</span>
+        <span class="separator">•</span>
+        <span>Wszystkie prawa zastrzeżone</span>
+      </div>
     </div>
   </footer>
 </div>
