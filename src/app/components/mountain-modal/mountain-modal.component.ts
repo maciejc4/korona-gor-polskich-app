@@ -99,11 +99,14 @@ export class MountainModalComponent implements OnInit, AfterViewInit, OnDestroy 
 
   openInMapyCz(): void {
     const { latitude, longitude } = this.mountain.details;
-    window.open(`https://mapy.cz/turisticka?x=${longitude}&y=${latitude}&z=15&source=coor&id=${longitude}%2C${latitude}`, '_blank');
+    // Używamy formatu który działa z Mapy.cz - mapa turystyczna
+    const url = `https://mapy.cz/turisticka?x=${longitude}&y=${latitude}&z=15`;
+    window.open(url, '_blank', 'noopener,noreferrer');
   }
 
   openInOSM(): void {
     const { latitude, longitude } = this.mountain.details;
-    window.open(`https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}#map=15/${latitude}/${longitude}`, '_blank');
+    const url = `https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}#map=15/${latitude}/${longitude}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
   }
 }

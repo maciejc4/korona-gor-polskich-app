@@ -1,4 +1,5 @@
-import { Injectable, signal, effect } from '@angular/core';
+import { Injectable, signal, effect, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 export type Theme = 'light' | 'dark';
 
@@ -7,13 +8,18 @@ export type Theme = 'light' | 'dark';
 })
 export class ThemeService {
   private readonly STORAGE_KEY = 'korona-gor-theme';
+  private platformId = inject(PLATFORM_ID);
   
   readonly theme = signal<Theme>(this.loadTheme());
 
   constructor() {
+    // Immediately apply theme
+    this.applyTheme(this.theme());
+    
+    // Watch for changes
     effect(() => {
       const currentTheme = this.theme();
-      document.documentElement.setAttribute('data-theme', currentTheme);
+      this.applyTheme(currentTheme);
       this.saveTheme(currentTheme);
     });
   }
@@ -22,7 +28,18 @@ export class ThemeService {
     this.theme.update(current => current === 'light' ? 'dark' : 'light');
   }
 
+  private applyTheme(theme: Theme): void {
+    if (isPlatformBrowser(this.platformId)) {
+      document.documentElement.setAttribute('data-theme', theme);
+      document.body.setAttribute('data-theme', theme);
+    }
+  }
+
   private loadTheme(): Theme {
+    if (!isPlatformBrowser(this.platformId)) {
+      return 'light';
+    }
+    
     try {
       const saved = localStorage.getItem(this.STORAGE_KEY);
       if (saved === 'light' || saved === 'dark') {
@@ -39,6 +56,10 @@ export class ThemeService {
   }
 
   private saveTheme(theme: Theme): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    
     try {
       localStorage.setItem(this.STORAGE_KEY, theme);
     } catch {

@@ -1,5 +1,17 @@
 import { Mountain } from '../models/mountain.model';
 
+// Zdjęcia z Unsplash (darmowe do użytku komercyjnego)
+const IMAGES = {
+  tatry: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&h=400&fit=crop',
+  beskidy: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&h=400&fit=crop',
+  karkonosze: 'https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?w=800&h=400&fit=crop',
+  bieszczady: 'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=800&h=400&fit=crop',
+  sudety: 'https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=800&h=400&fit=crop',
+  gory: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop',
+  pieniny: 'https://images.unsplash.com/photo-1491904768633-2b7e3e7fede5?w=800&h=400&fit=crop',
+  gorce: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=400&fit=crop'
+};
+
 export const KORONA_GOR_POLSKICH: Mountain[] = [
   {
     id: 1,
@@ -10,8 +22,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Rysy to najwyższy szczyt Polski, położony na granicy polsko-słowackiej w Tatrach Wysokich. Składa się z trzech wierzchołków, z których środkowy (2503 m) leży na Słowacji. Szczyt oferuje spektakularne widoki na Morskie Oko i otaczające szczyty tatrzańskie. Jest to cel marzeń wielu turystów górskich.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Rysy_z_Polskiej_Strony.jpg/1280px-Rysy_z_Polskiej_Strony.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.tatry,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 49.17947,
       longitude: 20.08825,
       trails: [
@@ -29,8 +41,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Babia Góra, zwana też Diablakiem, to najwyższy szczyt Beskidów. Charakteryzuje się zmiennymi warunkami pogodowymi i surowym klimatem. Jest siedzibą Babiogórskiego Parku Narodowego, chroniącego unikalne ekosystemy i endemiczne gatunki roślin.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Babia_G%C3%B3ra_a1.jpg/1280px-Babia_G%C3%B3ra_a1.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.beskidy,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 49.57306,
       longitude: 19.52944,
       trails: [
@@ -49,8 +61,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Śnieżka to najwyższy szczyt Karkonoszy i Sudetów. Na szczycie znajduje się charakterystyczna dyskoidalna budowla obserwatorium meteorologicznego. Jest jednym z najbardziej wietrznych miejsc w Polsce, z częstymi mgłami i opadami.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/20190602_Sn%C4%9B%C5%BEka_1318_2961_DxO.jpg/1280px-20190602_Sn%C4%9B%C5%BEka_1318_2961_DxO.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.karkonosze,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 50.73611,
       longitude: 15.73972,
       trails: [
@@ -69,8 +81,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Śnieżnik to najwyższy szczyt Masywu Śnieżnika w Sudetach Wschodnich. Na szczycie znajduje się kamienna wieża widokowa z XIX wieku. Góra jest znana z bogatej flory i jaskiń w swoich zboczach, w tym Jaskini Niedźwiedziej.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Snieznik_BM.jpg/1280px-Snieznik_BM.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.sudety,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 50.20694,
       longitude: 16.84889,
       trails: [
@@ -88,8 +100,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Tarnica to najwyższy szczyt polskich Bieszczadów. Charakteryzuje się rozległymi połoninami i dzikimi krajobrazami. Jest częścią Bieszczadzkiego Parku Narodowego, gdzie można spotkać niedźwiedzie, wilki i żubry.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Tarnica_a1.jpg/1280px-Tarnica_a1.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.bieszczady,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 49.07472,
       longitude: 22.72667,
       trails: [
@@ -107,8 +119,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Turbacz to najwyższy szczyt Gorców, pokryty rozległymi polanami reglowymi. Na szczycie znajduje się schronisko PTTK. Góra oferuje piękne widoki na Tatry, Beskidy i Pieniny.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Gorce_-_Turbacz_01.jpg/1280px-Gorce_-_Turbacz_01.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.gorce,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 49.54306,
       longitude: 20.11083,
       trails: [
@@ -126,8 +138,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Radziejowa to najwyższy szczyt Beskidu Sądeckiego. Na szczycie stoi metalowa wieża widokowa, z której roztacza się panorama na Tatry, Pieniny i Gorce. Góra jest popularna wśród turystów dzięki dobrze oznakowanym szlakom.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Radziejowa.jpg/1280px-Radziejowa.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.beskidy,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 49.44278,
       longitude: 20.60472,
       trails: [
@@ -145,8 +157,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Pilsko to drugi co do wysokości szczyt Beskidów po Babiej Górze. Charakteryzuje się rozległymi polanami i torfowiskami wysokogórskimi. Jest częścią Żywieckiego Parku Krajobrazowego.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Pilsko_z_Romanki.jpg/1280px-Pilsko_z_Romanki.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.beskidy,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 49.52528,
       longitude: 19.33444,
       trails: [
@@ -164,8 +176,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Skrzyczne to najwyższy szczyt Beskidu Śląskiego. Na szczycie znajduje się wieża telewizyjna i schronisko. Jest popularnym celem wycieczek ze Szczyrku, do którego prowadzi również kolej linowa.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Skrzyczne1.jpg/1280px-Skrzyczne1.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.beskidy,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 49.68472,
       longitude: 19.03167,
       trails: [
@@ -183,8 +195,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Mogielica to najwyższy szczyt Beskidu Wyspowego. Charakteryzuje się stożkowatym kształtem i metalową wieżą widokową na szczycie. Oferuje panoramę 360 stopni na okoliczne pasma górskie.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Mogielica_BW_01.JPG/1280px-Mogielica_BW_01.JPG',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.beskidy,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 49.65472,
       longitude: 20.27694,
       trails: [
@@ -202,8 +214,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Wysoka Kopa to najwyższy polski szczyt Gór Izerskich. Góra porośnięta jest lasem świerkowym i otoczona torfowiskami. Jest częścią Izerskiego Parku Krajobrazowego.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Wysoka_Kopa_z_Rozdro%C5%BCa_Izerskiego.jpg/1280px-Wysoka_Kopa_z_Rozdro%C5%BCa_Izerskiego.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.sudety,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 50.85750,
       longitude: 15.36056,
       trails: [
@@ -221,8 +233,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Wielka Sowa to najwyższy szczyt Gór Sowich. Na szczycie stoi zabytkowa, kamienna wieża widokowa z XIX wieku, nazywana Wieżą Bismarcka. Okolice góry kryją tajemnicze tunele z czasów II wojny światowej.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Wielka_Sowa_BW_3.JPG/1280px-Wielka_Sowa_BW_3.JPG',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.sudety,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 50.67972,
       longitude: 16.48556,
       trails: [
@@ -240,8 +252,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Lackowa to najwyższy szczyt Beskidu Niskiego. Góra leży na granicy polsko-słowackiej i oferuje spokojne szlaki przez bukowe lasy. Jest doskonałym miejscem na jesienne wędrówki.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Lackowa_04.jpg/1280px-Lackowa_04.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.beskidy,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 49.41472,
       longitude: 21.09639,
       trails: [
@@ -259,8 +271,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Orlica to najwyższy polski szczyt Gór Orlickich na granicy z Czechami. Na szczycie znajduje się drewniana wieża widokowa. Góra oferuje malownicze widoki na Kotlinę Kłodzką i Góry Bystrzyckie.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Orlica_wieza.jpg/800px-Orlica_wieza.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.sudety,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 50.35528,
       longitude: 16.38389,
       trails: [
@@ -278,8 +290,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Kowadło to najwyższy szczyt Gór Złotych. Charakteryzuje się charakterystycznym, płaskim wierzchołkiem przypominającym kowadło. Na szczycie stoi drewniana wieża widokowa.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Kowadlo-G%C3%B3ry_Z%C5%82ote.jpg/1280px-Kowadlo-G%C3%B3ry_Z%C5%82ote.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.sudety,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 50.29194,
       longitude: 17.06139,
       trails: [
@@ -297,8 +309,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Szczeliniec Wielki to najwyższy szczyt Gór Stołowych, znany z unikalnych formacji skalnych i labiryntu szczelin. Jest częścią Parku Narodowego Gór Stołowych. Wejście prowadzi przez malownicze skalne korytarze.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Szczeliniec_Wielki_a1.jpg/1280px-Szczeliniec_Wielki_a1.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.sudety,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 50.48472,
       longitude: 16.34083,
       trails: [
@@ -316,8 +328,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Jagodna to najwyższy szczyt Gór Bystrzyckich. Na szczycie znajduje się schronisko turystyczne i wieża widokowa. Góra jest popularna wśród narciarzy biegowych zimą.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Jagodna%2C_Bystrzyckie_Mountains.jpg/1280px-Jagodna%2C_Bystrzyckie_Mountains.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.sudety,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 50.26417,
       longitude: 16.55361,
       trails: [
@@ -335,8 +347,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Rudawiec to najwyższy szczyt Gór Kamiennych. Położony w Parku Krajobrazowym Sudetów Wałbrzyskich, oferuje widoki na okoliczne pasma górskie. Szlaki prowadzące na szczyt biegną przez malownicze lasy.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Rudawiec.jpg/1280px-Rudawiec.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.sudety,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 50.69694,
       longitude: 16.21750,
       trails: [
@@ -354,8 +366,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Waligóra to drugi co do wysokości szczyt Gór Kamiennych. Na szczycie znajduje się kamienna wieża widokowa z początku XX wieku. Jest popularnym celem wycieczek z Wałbrzycha.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Walig%C3%B3ra.jpg/1280px-Walig%C3%B3ra.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.sudety,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 50.70278,
       longitude: 16.26444,
       trails: [
@@ -373,8 +385,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Chełmiec to najwyższy szczyt Gór Wałbrzyskich. Góra położona jest w bezpośrednim sąsiedztwie Wałbrzycha i oferuje widoki na miasto i okoliczne góry. Szlaki są łatwo dostępne.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Che%C5%82miec_Wa%C5%82brzyski.jpg/1280px-Che%C5%82miec_Wa%C5%82brzyski.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.sudety,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 50.75639,
       longitude: 16.20167,
       trails: [
@@ -392,8 +404,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Skalnik to najwyższy szczyt Rudaw Janowickich. Na szczycie znajduje się kamienne schronisko. Góra słynie z malowniczych formacji skalnych i pozostałości dawnego górnictwa.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Skalnik_RJ_1.jpg/1280px-Skalnik_RJ_1.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.sudety,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 50.84361,
       longitude: 15.93139,
       trails: [
@@ -411,8 +423,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Wysoka to najwyższy szczyt Pienin Właściwych. Góra położona jest w Pienińskim Parku Narodowym i oferuje spektakularne widoki na Przełom Dunajca i Tatry. Charakteryzuje się wapiennymi formacjami skalnymi.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Wysoka_Pieniny.jpg/1280px-Wysoka_Pieniny.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.pieniny,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 49.41778,
       longitude: 20.40889,
       trails: [
@@ -430,8 +442,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Lubomir to jeden z głównych szczytów Beskidu Makowskiego. Charakteryzuje się rozległą polaną szczytową z panoramicznymi widokami. Jest popularnym celem rodzinnych wycieczek.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Lubomir_012.JPG/1280px-Lubomir_012.JPG',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.beskidy,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 49.82028,
       longitude: 19.95028,
       trails: [
@@ -449,8 +461,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Łysica to najwyższy szczyt Gór Świętokrzyskich i jednocześnie najniższy z koronnych szczytów. Góra porośnięta jest świętokrzyską puszczą jodłową. W pobliżu znajdują się gołoborza - pola głazów kwarcytowych.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/%C5%81ysica_BW.jpg/1280px-%C5%81ysica_BW.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.gory,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 50.89167,
       longitude: 20.90194,
       trails: [
@@ -468,8 +480,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Ślęża to izolowany masyw górski na Przedgórzu Sudeckim. Góra ma bogatą historię kultową sięgającą czasów celtyckich. Na szczycie znajdują się tajemnicze kamienne rzeźby i bazylika.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/%C5%9Al%C4%99%C5%BCa_Mountain.jpg/1280px-%C5%9Al%C4%99%C5%BCa_Mountain.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.gory,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 50.86528,
       longitude: 16.70917,
       trails: [
@@ -487,8 +499,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Kłodzka Góra to najwyższy szczyt Gór Bardzkich. Na szczycie znajduje się wieża widokowa oferująca panoramę na Kotlinę Kłodzką. Góra jest częścią Parku Krajobrazowego Gór Bardzkich.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/K%C5%82odzka_G%C3%B3ra.jpg/1280px-K%C5%82odzka_G%C3%B3ra.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.sudety,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 50.44250,
       longitude: 16.69528,
       trails: [
@@ -506,8 +518,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Luboń Wielki to najwyższy szczyt Beskidu Makowskiego. Na szczycie stoi charakterystyczna wieża telewizyjna widoczna z daleka. Góra oferuje rozległe widoki na Tatry i Beskidy.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Lubo%C5%84_Wielki_from_Lubomir.jpg/1280px-Lubo%C5%84_Wielki_from_Lubomir.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.beskidy,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 49.73778,
       longitude: 19.96306,
       trails: [
@@ -525,8 +537,8 @@ export const KORONA_GOR_POLSKICH: Mountain[] = [
     climbed: false,
     details: {
       description: 'Wielka Rawka to jeden z najwyższych szczytów polskich Bieszczadów. Charakteryzuje się rozległymi połoninami i widokami na dzikie bieszczadzkie krajobrazy. Jest częścią Bieszczadzkiego Parku Narodowego.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Wielka_Rawka_BdPN.jpg/1280px-Wielka_Rawka_BdPN.jpg',
-      imageAttribution: 'Wikimedia Commons - CC BY-SA',
+      imageUrl: IMAGES.bieszczady,
+      imageAttribution: 'Unsplash - darmowe',
       latitude: 49.08556,
       longitude: 22.61278,
       trails: [

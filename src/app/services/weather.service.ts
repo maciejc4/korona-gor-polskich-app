@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 
 export interface WeatherData {
   temperature: number;
@@ -9,30 +11,36 @@ export interface WeatherData {
   icon: string;
 }
 
+interface OpenMeteoResponse {
+  current: {
+    temperature_2m: number;
+    relative_humidity_2m: number;
+    weather_code: number;
+    wind_speed_10m: number;
+  };
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherService {
   private readonly API_URL = 'https://api.open-meteo.com/v1/forecast';
+  private http = inject(HttpClient);
 
   async getWeather(latitude: number, longitude: number): Promise<WeatherData | null> {
     try {
-      const params = new URLSearchParams({
-        latitude: latitude.toString(),
-        longitude: longitude.toString(),
-        current: 'temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m',
-        timezone: 'Europe/Warsaw'
-      });
+      const params = [
+        `latitude=${latitude}`,
+        `longitude=${longitude}`,
+        'current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m',
+        'timezone=Europe/Warsaw'
+      ].join('&');
 
-      const response = await fetch(`${this.API_URL}?${params}`);
-      
-      if (!response.ok) {
-        throw new Error('Weather API error');
-      }
+      const data = await firstValueFrom(
+        this.http.get<OpenMeteoResponse>(`${this.API_URL}?${params}`)
+      );
 
-      const data = await response.json();
       const current = data.current;
-
       const weatherInfo = this.getWeatherInfo(current.weather_code);
 
       return {
@@ -50,7 +58,6 @@ export class WeatherService {
   }
 
   private getWeatherInfo(code: number): { description: string; icon: string } {
-    // WMO Weather interpretation codes
     const weatherCodes: { [key: number]: { description: string; icon: string } } = {
       0: { description: 'Bezchmurnie', icon: 'wb_sunny' },
       1: { description: 'Głównie bezchmurnie', icon: 'wb_sunny' },
